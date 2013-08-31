@@ -1,10 +1,29 @@
 <html>
+<?php
+session_start();
+if(!isset($_SESSION['check1'])){
+$_SESSION['check1']=0;}
+$a=0;
+$con=mysqli_connect("localhost","root","","player");
+$sql="UPDATE position SET x='1'";
+if(mysqli_query($con,$sql));
+$con=mysqli_connect("localhost","root","","player");
+$sql="UPDATE position SET y='4'";
+if(mysqli_query($con,$sql));
+if(isset($_POST["sub"])){
+if($_POST["ans"]=="fenrir greyback"){
+$a=1;
+}}
+?>
 <style>
+body{
+background-color:black;
+}
 img#w{
-margin-top:-12%;
+margin-top:-40%;
 }
 img#f{
-margin-top:-12%;
+margin-top:-40%;
 opacity:0.5;
 }
 p{
@@ -19,15 +38,27 @@ font-weight:15px;
 img{
 z-index:-10;
 }
-h3{
+#back{
+background-color:black;
+color:red;
+font-family:chiller,Helvetica,Ariel,sans-seriff;
+font-size:30px;
+font-weight:20px;
+width:100px;
+height:40px;
+border:0;
 position:absolute;
+top:2%;
+}
+h3{
+position:relative;
 font-family:chiller,Helvetica,Ariel,sans-seriff;
 font-size:35px;
 text-align:left;
-padding-left:200px;
-top:20%;
+padding-left:20%;
+top:-150%;
 color:red;
-width:450px;
+width:30%;
 }
 #c{
 visibility:hidden;
@@ -40,11 +71,11 @@ visibility:hidden;
  background-image:url(halloween1.jpg);
  background-repeat:no-repeat;
  background-color:red;
- height:400px;
- width:800px;
- position:absolute;
- left:350px;
- top:150px;
+ height:60%;
+ width:60%;
+ position:relative;
+ left:30%;
+ top:-80%;
  visibility:hidden;
  
 }
@@ -53,11 +84,18 @@ border-radius:5px;
 }
 </style>
 <body>
+<audio id="au1">
+<source src="wolf12.wav" type="audio/wav">
+</audio>
+<audio id="au2">
+<source src="wolf11.wav" type="audio/wav">
+</audio>
 <canvas id="canv" width="1334px" height="720px"></canvas>
 <div id="clue" style="border-style:double;color:red;border-width:5px;"><pre>WHO AM I?
      Rhiqeq oqhlacnd</br></br>
- <input type="text" style="height:40px;width:200px;font-size:30px;" id="ans" /> 
- <input type="button" style="height:40px;width:200px;font-size:30px;" value="Submit" onclick="check()"/>
+	 <form name="form1" method="post" action="check.php">
+ <input type="text" style="height:40px;width:200px;font-size:30px;position:absolute;top:70%;" name="ans1" /> 
+ <input type="submit" style="height:40px;width:200px;font-size:30px;position:absolute;top:85%;" name="sub" value="Submit"/></form>
  <input type="button" style="height:40px;width:200px;font-size:30px;left:70%;position:absolute;top:85%" value="back" onclick="change()"/>
  </pre>
   </div>
@@ -69,9 +107,17 @@ border-radius:5px;
 <p  id="b" style="top:95%;" >Can you give me some Info about the Thief.</p>
 <p  id="c" style="top:99%;" >yes.</p>
 <h3 id="msg"></h3>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+<form name="form2" action="fmaze2.php" method="post">
+<input id="back" type="submit" value="back" name="back">
+</form>
+<script src="jquery.js">
 </script>
 <script type="text/javascript">
+var w="<?php echo $a; ?>"; 
+if(w=="1"){
+alert("yes!!");
+}
+        var ind=0,ctr=0,s,q;
         var canvas = document.getElementById('canv');
         var ctx = canvas.getContext('2d');
 
@@ -81,34 +127,73 @@ myimage.onload = function() {
                      ctx.drawImage(myimage, 0, 0,1334,560);
                  }
 				 var imageone = new Image();
-				 
 				 var show=function(t,m,ind,i){
 if(ind<m.length){
 $(t).append(m[ind++]);
-setTimeout(function() {show(t,m,ind,i);},i);
+ctr=1;
 }
+else{if(i==0){
+clearInterval(s);}
+else{
+clearInterval(q);}}
 }
-$( "#a" ).click(function(){
+$( "#a" ).click(function(){s
+document.getElementById("clue").style.zIndex=50;
+if(ctr==1){
+clearInterval(q);
+clearInterval(s);
+ind=0;
+ctr=0;}
+var m=document.getElementById("au1");
+m.autoplay=false;
+m.load();
+var m=document.getElementById("au2");
+m.autoplay=true;
+m.load();
 document.getElementById("msg").innerHTML="";
-show("#msg","A werewolf, also known as a lycanthrope, is a mythological or folkloric human with the ability to shapeshift into a wolf or an therianthropic hybrid wolf-like creature, either purposely or after being placed under a curse or affliction",0,15);
+s=setInterval(function(){show("#msg","A werewolf, also known as a lycanthrope, is a mythological human with the ability to shapeshift into a wolf-like creature",ind++,0)},90);
 });
 $( "#b" ).click(function(){
+document.getElementById("clue").style.zIndex=50;
+if(ctr==1){
+clearInterval(s);
+clearInterval(q);
+ind=0;
+ctr=0;}
+var m=document.getElementById("au2");
+m.autoplay=false;
+m.load();
+var m=document.getElementById("au1");
+m.autoplay=true;
+m.load();
 document.getElementById("msg").innerHTML="";
-show("#msg","Help shall be given to those who earn it.Are you ready to Trick or Treat?!!",0,15);
+q=setInterval(function(){show("#msg","Help shall be given to those who earn it.Are you ready to Trick or Treat?!!",ind++,1)},70);
 document.getElementById("c").style.visibility="visible";
 });
-function check()
-{var answer=document.getElementById("ans").value;
- if(answer=="fenrir greyback")
-  alert("Right Answer!");
-}
 function change(){
 document.getElementById("clue").style.visibility="hidden";
+document.getElementById("clue").style.zIndex=-50;
 }
 $( "#c" ).click(function(){
+if(ctr==1){
+clearInterval(s);
+clearInterval(q);
+ind=0;
+ctr=0;}
+var m=document.getElementById("au2");
+m.autoplay=false;
+m.load();
+var m=document.getElementById("au1");
+m.autoplay=false;
+m.load();
 document.getElementById("msg").innerHTML="";
 document.getElementById("clue").style.visibility="visible";
+document.getElementById("clue").style.zIndex=50;
 });
+var chec="<?php echo $_SESSION['check1']; ?>";
+if(chec=="1"){
+alert("Clue obtained ! Added to inventory.");
+}
 </script>
 </body>
 </html>
