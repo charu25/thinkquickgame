@@ -112,7 +112,7 @@ div#floor {
  position : absolute;
  width : 100%;
  height : 100%;
- background-url : black;
+ background-color:#221E1E;
 
  
 }
@@ -123,7 +123,7 @@ div#ceiling {
  position : absolute;
  width : 100%;
  height : 50%;
- background-image:url('sky2.jpg');
+ background-image:url('sky0.gif');
  background-color : rgb(96,96,96);
  background-repeat:no-repeat;
  background-size:100% 100%;
@@ -169,6 +169,20 @@ border:0;
  z-index:-100;
  visibility:hidden; 
 }
+body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #container {
+	  position:relative;
+	  top:-400px;
+	  left:200px;
+	  z-index:300px;
+        background-color: transparent;
+        display: inline-block;
+        width: 1000px;
+        height: 800px;
+      }
 #inventory1
 {
  font-size:30px;
@@ -189,6 +203,16 @@ border:0;
 #inv{
 font-size:20px;
 font-weight:600;}
+#ghost1{
+visibility:hidden;
+left:350px;
+position:absolute;
+top:250px;}
+#ghost2{
+visibility:hidden;
+left:350px;
+position:absolute;
+top:280px;}
 </style>
 
 <script src="excanvas.js" type="text/javascript"></script>
@@ -205,7 +229,10 @@ font-weight:600;}
 <p id="words">                   CODE OBTAINED:
                   </p></div></pre>
 <div id="inventory1" onclick="makevisible()">INVENTORY</div>
+<img id="ghost1" src="ghost.gif" alt="g" width="10" height="10">
+<img id="ghost2" src="skele.gif" alt="g" width="260" height="260">
 </div>
+<div id="container"></div>
 <div id="pc1" class="pc">
 <audio id="audio" >
   <source src="howl.mp3" type="audio/mp3">
@@ -286,9 +313,9 @@ var map = [
 	[1,0,0,3,4,0,0,0,0,0,0,1,0,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,3,0,0,1],
 	[1,0,0,0,4,0,0,0,0,0,0,1,3,1,1,1,2,1,1,3,0,0,0,0,0,0,0,0,0,0,0,1],
 	[1,0,0,0,4,0,0,0,0,0,0,1,3,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,4,0,1,0,0,1,0,0,3,3,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,0,0,1,0,0,1,0,0,0,3,3,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,0,0,1,0,0,1,0,0,0,0,3,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,4,0,0,0,0,1,0,0,3,3,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,1,0,0,0,3,3,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,1,0,0,0,0,3,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 	[1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
 	[1,0,0,3,4,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,1],
 	[1,0,0,3,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,1],
@@ -601,7 +628,7 @@ function initScreen() {
 		strip.style.backgroundColor = "transparent";
 
 		var img = new Image();
-		img.src = (window.opera ? "walls_19color.png" : "capture5.png");
+		img.src = (window.opera ? "walls_19color.png" : "wall6.png");
 		img.style.position = "absolute";
 		img.style.left = "0px";
 
@@ -620,11 +647,11 @@ function bindKeys() {
 
 	document.onkeydown = function(e) {
 		e = e || window.event;
-
+        e.preventDefault();
 		switch (e.keyCode) { // which key was pressed?
 
 			case 38: // up, move player forward, ie. increase speed
-				player.speed = 1;
+				player.speed = .5;
 				if(track==1){
 				player.speed = 1.5;
 				}
@@ -636,25 +663,25 @@ function bindKeys() {
 				break;
 
 			case 40: // down, move player backward, set negative speed
-				player.speed = -1;
+				player.speed = -.5;
 				if(track==1){
 				player.speed = -1.5;
 				}
 				break;
 
 			case 37: // left, rotate player left
-				player.dir = -1;
+				player.dir = -.5;
 				break;
 
 			case 39: // right, rotate player right
-				player.dir = 1;
+				player.dir = .5;
 				break;
 		}
 	}
 
 	document.onkeyup = function(e) {
 		e = e || window.event;
-
+          
 		switch (e.keyCode) {
 			case 38:
 			case 40:
@@ -749,7 +776,7 @@ function castSingleRay(rayAngle, stripIdx) {
 		var wallY = Math.floor(y);
 
 		// is this point inside a wall block?
-		if (map[wallY][wallX] > 0 && map[wallY][wallX]!=4) {
+		if (map[wallY][wallX] > 0) {
 			var distX = x - player.x;
 			var distY = y - player.y;
 			dist = distX*distX + distY*distY;	// the distance from the player to this point, squared.
@@ -785,7 +812,7 @@ function castSingleRay(rayAngle, stripIdx) {
 	while (x >= 0 && x < mapWidth && y >= 0 && y < mapHeight) {
 		var wallY = Math.floor(y + (up ? -1 : 0));
 		var wallX = Math.floor(x);
-		if (map[wallY][wallX] > 0 && map[wallY][wallX]!=4) {
+		if (map[wallY][wallX] > 0) {
 			var distX = x - player.x;
 			var distY = y - player.y;
 			var blockDist = distX*distX + distY*distY;
@@ -821,14 +848,12 @@ function castSingleRay(rayAngle, stripIdx) {
 		// thus the height on the screen is equal to wall_height_real * viewDist / dist
 
 		var height = Math.round(viewDist / dist);
-
 		// width is the same, but we have to stretch the texture to a factor of stripWidth to make it fill the strip correctly
 		var width = height * stripWidth;
 
 		// top placement is easy since everything is centered on the x-axis, so we simply move
 		// it half way down the screen and then half the wall height back up.
 		var top = Math.round((screenHeight - height) / 2);
-
 		strip.style.height = height+"px";
 		strip.style.top = top+"px";
 
@@ -891,9 +916,194 @@ function makeinvisible()
 }
 
 </script>
+    <script src="kinetic.js"></script>
+    <script>
+       var anim=0,flag=0,i=0,mv;
+	var blob;
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: 1000,
+        height: 800
+      });
+	  var layer = new Kinetic.Layer();
+      var animations = {
+        idle0: [{
+          x: 2,
+          y: 2,
+          width: 70,
+          height: 119
+        }, {
+          x: 71,
+          y: 2,
+          width: 74,
+          height: 119
+        }, {
+          x: 146,
+          y: 2,
+          width: 81,
+          height: 119
+        }, {
+          x: 226,
+          y: 2,
+          width: 76,
+          height: 119
+        }],
+		 punch0: [{
+          x: 2,
+          y: 138,
+          width: 74,
+          height: 122
+        }, {
+          x: 76,
+          y: 138,
+          width: 84,
+          height: 122
+        }, {
+          x: 346,
+          y: 138,
+          width: 120,
+          height: 122
+        }],
+		idle1: [{
+          x: 6,
+          y: 7,
+          width: 100,
+          height: 96
+        }, {
+          x: 116,
+          y: 10,
+          width: 98,
+          height: 96
+        }, {
+          x: 220,
+          y: 11,
+          width: 100,
+          height: 96
+        }, {
+          x: 327,
+          y: 15,
+          width: 127,
+          height: 93
+        },{
+          x: 125,
+          y: 252,
+          width: 131,
+          height: 96
+        },{
+          x: 263,
+          y: 253,
+          width: 163,
+          height: 96
+        },{
+          x: 740,
+          y: 251,
+          width: 131,
+          height: 96
+        }],
+		punch1:[{
+		x: 5,
+          y: 368,
+          width: 92,
+          height: 98
+		  },{
+		x: 110,
+          y: 410,
+          width: 164,
+          height: 71
+		  }],
+		
+      };
+	  setInterval(function(){
+	  if(anim==0){
+	  i=Math.floor(Math.random()*2);
+      var imageObj = new Image();
+      imageObj.onload = function() {
+        blob = new Kinetic.Sprite({
+          x: 0,
+          y: 40,
+          image: imageObj,
+          animation: 'idle'+i,
+          animations: animations,
+          frameRate: 7,
+          index: 0
+        });
+        layer.add(blob);
+		flag=1;
+        stage.add(layer);
+        blob.start();
+		anim=1;
+		};
+		switch(i){
+		case 0:imageObj.src = 'blob.png';blobw=20;document.getElementById("container").style.top=-400;mv=150;break;
+		case 1:imageObj.src = 'snake.gif';blobw=40;document.getElementById("container").style.top=-800;mv=250;break;}}
+	  if(flag==1){
+var blobmove=setInterval(function(){move1()},mv);
+var count=0;
+function move1(){
+blob.setX(blob.getX()+10);
+if(blob.getX()==1000 || count==5){
+blob.stop();
+anim=0;
+blob.remove();
+layer.remove();
+clearInterval(blobmove);
+}
+if(i==1){
+blob.setY(blob.getY()+5);}
+document.onclick=function(evt) {
+    evt = (evt || event);
+    if(evt.clientX>(blob.getX()+200-blobw) && evt.clientX<(blob.getX()+200+blobw)){
+	count++;
+	blob.setAnimation('punch'+i);
+          var fr;
+		  if(i==0){fr=2;}
+		  else{fr=1;}
+          blob.afterFrame(fr, function() {
+            blob.setAnimation('idle'+i);
+          });
+}
+}}
+flag=0;}
+},1000);
+	  var change=30,ganim=0,ghsot=0,g;
+	  setInterval(function(){
+	  if(ganim==0){
+	  j=Math.floor(Math.random()*2+1);
+	
+	  if(j==1){
+	ghost= setInterval(function(){
+	g=document.getElementById("ghost1");
+	  g.style.visibility="visible";
+	  g.style.zIndex=700;
+	  g.height+=change;
+	  g.width+=change;
+	  if(g.height>=550){
+	  change=-30;}
+	  if(g.height==10 && change==-30){
+	  change=30;
+	  g.style.visibility="hidden";
+	  g.style.zIndex=-100;
+	  g.style.top=250;
+	  g.style.left=350;
+	  g.height=10;
+	  g.width=10;
+	  ganim=0;
+	  clearInterval(ghost);
+	  }
+	  },200);ganim=1;}
+	  if(j==2){
+	g=document.getElementById("ghost2");
+	  g.style.visibility="visible";
+	  g.style.zIndex=700;ganim=1;}
+	  }
+	  else if(j==2 && ganim==1){
+	  g.style.visibility="hidden";
+	  g.style.zIndex=-100;ganim=0;}
+	 },5000);
+    </script>
 <audio autoplay="autoplay" loop="loop">
   
-  <source src="hp.mp3" type="audio/mpeg">
+  <source src="conjuring.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
 </audio>
 

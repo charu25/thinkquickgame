@@ -19,6 +19,9 @@ $a=1;
 body{
 background-color:black;
 }
+.HL{
+background: #ffff00;
+}
 img#w{
 margin-top:-40%;
 }
@@ -105,7 +108,7 @@ border-radius:5px;
 </div>
 <p  id="a" style="top:90%;" >Tell me about werewolves.</p>
 <p  id="b" style="top:95%;" >Can you give me some Info about the Thief.</p>
-<p  id="c" style="top:99%;" >yes.</p>
+<p  id="c" class="HL" style="top:99%;" >yes.</p>
 <h3 id="msg"></h3>
 <form name="form2" action="fmaze2.php" method="post">
 <input id="back" type="submit" value="back" name="back">
