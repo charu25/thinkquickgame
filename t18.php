@@ -1,14 +1,13 @@
 <!--whitewalkers-->
 <html>
 <?php
+include("config.lib.php");
 session_start();
 if(!isset($_SESSION['check8'])){
 $_SESSION['check8']=0;}
-$con=mysqli_connect("localhost","root","","player");
-$sql="UPDATE position SET x='29'";
+$sql="UPDATE position SET x='23'";
 if(mysqli_query($con,$sql));
-$con=mysqli_connect("localhost","root","","player");
-$sql="UPDATE position SET y='14'";
+$sql="UPDATE position SET y='2.2'";
 if(mysqli_query($con,$sql));
 ?>
 <style>
@@ -90,20 +89,22 @@ top:2%;
  visibility:hidden;
  z-index:200;
 }
-
+.HL{
+background: #ffff00;
+}
 </style>
 <body>
 <div id="clue" ><pre>
-   <img src="riddle2.png" alt="cipher"/>
+   <img src="riddle2.jpg" alt="cipher"/>
   <form name="form1" method="post" action="check.php">
     <input type="text" style="height:50px;width:200px;font-size:30px;" id="ans" name="ans8"/> <input type="submit" style="height:50px;width:150px;font-size:30px;" value="Submit"/> <input type="button" style="height:50px;width:150px;font-size:30px;" value="back" onclick="change()"/></form>
  </pre>
   </div>
 <audio id="au1">
-<source src="whitewalker2.wav" type="audio/wav">
+<source src="whitewalker2.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="whitewalker1.wav" type="audio/wav">
+<source src="whitewalker1.mp3" type="audio/mp3">
 </audio>
 <img id="white" src="whitewalker.png" width="1000px" height="560px">
 <div>
@@ -112,7 +113,7 @@ top:2%;
 </div>
 <p  id="a" style="top:-150px;" >Tell me about white walkers.</p>
 <p  id="b" style="top:-190px;" >Can you give me some information about the thief?</p>
-<p  id="c" style="top:-240px;" >Okay.</p>
+<p  id="c" style="top:-240px;font-size:50px;" >Okay.</p>
 <h3 id="msg"></h3>
 <form action="fmaze2.php" method="post">
 <input id="back" type="submit" value="back" name="back">
@@ -120,19 +121,26 @@ top:2%;
 <script src="jquery.js">
 </script>
 <script type="text/javascript">
-var ind=0,ctr=0,s,q;
+var ind=0,ctr=0,s,q,mm=0;
+var cluehnd=document.getElementById("clue");
+var msghnd=document.getElementById("msg");
+var whnd=document.getElementById("white");
+
 				 var show=function(t,m,ind,i){
 if(ind<m.length){
 $(t).append(m[ind++]);
 ctr=1;
 }
 else{if(i==0){
-clearInterval(s);}
+clearInterval(s);
+}
 else{
 clearInterval(q);}}
 }
 $( "#a" ).click(function(){
-document.getElementById("clue").style.zIndex=200;
+cluehnd.style.zIndex=200;
+clearInterval(q);
+clearInterval(s);
 if(ctr==1){
 clearInterval(q);
 clearInterval(s);
@@ -144,14 +152,18 @@ m.load();
 var m=document.getElementById("au2");
 m.autoplay=true;
 m.load();
-document.getElementById("msg").innerHTML="";
+msghnd.innerHTML="";
 s=setInterval(function(){show("#msg","The White Walkers, a mythological race mentioned in ancient legends from the time of the First Men and the Children of the Forest.",ind++,0)},120);
 });
 $( "#b" ).click(function(){
-document.getElementById("clue").style.zIndex=200;
-if(ctr==1){
-clearInterval(s);
+
 clearInterval(q);
+clearInterval(s);
+cluehnd.style.zIndex=200;
+if(ctr==1){
+clearInterval(mm);
+clearInterval(q);
+clearInterval(s);
 ind=0;
 ctr=0;}
 var m=document.getElementById("au2");
@@ -160,7 +172,7 @@ m.load();
 var m=document.getElementById("au1");
 m.autoplay=true;
 m.load();
-document.getElementById("msg").innerHTML="";
+msghnd.innerHTML="";
 q=setInterval(function(){show("#msg","You see a glint of blue you stop seeing and start running for winter is coming.",ind++,1)},110);
 document.getElementById("c").style.visibility="visible";
 });
@@ -171,8 +183,8 @@ function check()
   
 }
 function change(){
-document.getElementById("clue").style.visibility="hidden";
-document.getElementById("clue").style.zIndex=-200;
+cluehnd.style.visibility="hidden";
+cluehnd.style.zIndex=-200;
 }
 $( "#c" ).click(function(){
 var m=document.getElementById("au2");
@@ -186,14 +198,15 @@ clearInterval(s);
 clearInterval(q);
 ind=0;
 ctr=0;}
-document.getElementById("msg").innerHTML="";
-document.getElementById("clue").style.visibility="visible";
-document.getElementById("clue").style.zIndex=200;
+msghnd.innerHTML="";
+cluehnd.style.visibility="visible";
+cluehnd.style.zIndex=200;
 });
 var chec="<?php echo $_SESSION['check8']; ?>";
 if(chec=="1"){
 alert("Clue obtained! Added to inventory.");
 }
+
 </script>
 </body>
 </html>

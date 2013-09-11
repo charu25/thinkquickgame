@@ -1,19 +1,20 @@
 <!--dragon-->
 <html>
 <?php
-session_start();
+include("config.lib.php");
 if(!isset($_SESSION['check2'])){
 $_SESSION['check2']=0;}
-$con=mysqli_connect("localhost","root","","player");
-$sql="UPDATE position SET x='6'";
+$sql="UPDATE position SET x='13'";
 if(mysqli_query($con,$sql));
-$con=mysqli_connect("localhost","root","","player");
-$sql="UPDATE position SET y='4'";
+$sql="UPDATE position SET y='15'";
 if(mysqli_query($con,$sql));
 ?>
 <style>
 body{
 background-color:black;
+}
+.HL{
+background: #ffff00;
 }
 img#w{
 position:relative;
@@ -111,10 +112,10 @@ top:2%;
 <input id="back" type="submit" value="back" name="back">
 </form>
 <audio id="au1">
-<source src="dragon2.wav" type="audio/wav">
+<source src="dragon2.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="dragon1.wav" type="audio/wav">
+<source src="dragon1.mp3" type="audio/mp3">
 </audio>
 <img id="drag" src="dragon.gif" width="60%" height="70%">
 <img id="fire" src="fire.jpg" width="1000px" height="400px">
@@ -124,14 +125,16 @@ top:2%;
 </div>
 <p  id="a" style="top:-150px;" >Tell me about dragons.</p>
 <p  id="b" style="top:-190px;" >Will you give me some information about the thief?</p>
-<p  id="c" style="top:-240px;" >Okay.</p>
+<p  id="c" style="top:-240px;font-size:50px;" >Okay.</p>
 <h3 id="msg"></h3>
 <script src="jquery.js">
 </script>
 <script type="text/javascript">
 var ind=0,ctr=0,s,q;
+var cluehnd=document.getElementById("clue");
 var show=function(t,m,ind,i){
-if(ind<m.length){
+if(ind<m.length)
+{
 $(t).append(m[ind++]);
 ctr=1;
 }
@@ -141,7 +144,7 @@ else{
 clearInterval(q);}}
 }
 $( "#a" ).click(function(){
-document.getElementById("clue").style.zIndex=200;
+cluehnd.style.zIndex=200;
 if(ctr==1){
 clearInterval(q);
 clearInterval(s);
@@ -157,12 +160,14 @@ document.getElementById("msg").innerHTML="";
 s=setInterval(function(){show("#msg","A dragon is a legendary creature, typically with serpentine or reptilian traits,that features in many myths.",ind++,0)},80);
 });
 $( "#b" ).click(function(){
-document.getElementById("clue").style.zIndex=200;
-if(ctr==1){
+cluehnd.style.zIndex=200;
+if(ctr==1)
+{
 clearInterval(s);
 clearInterval(q);
 ind=0;
-ctr=0;}
+ctr=0;
+}
 var m=document.getElementById("au2");
 m.autoplay=false;
 m.load();
@@ -179,11 +184,13 @@ function check()
   alert("Right Answer!");
   
 }
-function change(){
-document.getElementById("clue").style.visibility="hidden";
-document.getElementById("clue").style.zIndex=-200;
+function change()
+{
+cluehnd.style.visibility="hidden";
+cluehnd.style.zIndex=-200;
 }
-$( "#c" ).click(function(){
+$( "#c" ).click(function()
+{
 var m=document.getElementById("au2");
 m.autoplay=false;
 m.load();
@@ -196,8 +203,8 @@ clearInterval(q);
 ind=0;
 ctr=0;}
 document.getElementById("msg").innerHTML="";
-document.getElementById("clue").style.visibility="visible";
-document.getElementById("clue").style.zIndex=200;
+cluehnd.style.visibility="visible";
+cluehnd.style.zIndex=200;
 });
 $("#back").click(function(){
 window.location.replace("fmaze2.php");

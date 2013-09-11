@@ -1,13 +1,12 @@
+<!--chimera-->
 <html>
 <?php
-session_start();
+include("config.lib.php");
 if(!isset($_SESSION['check7'])){
 $_SESSION['check7']=0;}
-$con=mysqli_connect("localhost","root","","player");
-$sql="UPDATE position SET x='25'";
+$sql="UPDATE position SET x='27.4'";
 if(mysqli_query($con,$sql));
-$con=mysqli_connect("localhost","root","","player");
-$sql="UPDATE position SET y='14'";
+$sql="UPDATE position SET y='16'";
 if(mysqli_query($con,$sql));
 ?>
 <style>
@@ -85,7 +84,7 @@ top:2%;
  visibility:hidden;
  z-index:200;
 }
-#chimera{
+#chimera,#chimeraopen{
 position:relative;
 left:700px;
 z-index:10;
@@ -97,13 +96,18 @@ position:relative;
 left:200px;
 top:-300px;
 }
+.HL{
+background: #ffff00;
+}
+#chimeraopen{
+display:none;}
 </style>
 <body>
 <audio id="au1">
-<source src="chimera2.wav" type="audio/wav">
+<source src="chimera2.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="chimera1.wav" type="audio/wav">
+<source src="chimera1.mp3" type="audio/mp3">
 </audio>
 <div id="clue" ><pre>
    <img src="cipher3.png" alt="cipher"/><form method="post" action="check.php">
@@ -111,6 +115,7 @@ top:-300px;
  </pre>
   </div>
 <img id="chimera" src="chimera.png" width="500px" height="400px">
+<img id="chimeraopen" src="chimera_open.png" width="500px" height="400px">
 <img id="cave" src="cave1.jpg" width="1000px" height="480px">
 <div>
 <img id="w" src="wood.jpg" alt="wood" width="1000px" height="150px">
@@ -118,7 +123,7 @@ top:-300px;
 </div>
 <p  id="a" style="top:-450px;" >Tell me about a chimera.</p>
 <p  id="b" style="top:-490;" >Can you give me some Info about the Thief.</p>
-<p  id="c" style="top:-540;" >yes.</p>
+<p  id="c" style="top:-540;font-size:50px;" >yes.</p>
 <h3 id="msg"></h3>
 <form name="form7" action="fmaze2.php" method="post">
 <input type="submit" id="back" value="back" name="back">
@@ -126,7 +131,11 @@ top:-300px;
 <script src="jquery.js">
 </script>
 <script type="text/javascript">
-var ind=0,ctr=0,s,q,mm;
+var ind=0,ctr=0,s,q,mm=0;
+var chnd=document.getElementById("chimera");
+var cohnd=document.getElementById("chimeraopen");
+var cluehnd=document.getElementById("clue");
+
 				 var show=function(t,m,ind,i){
 if(ind<m.length){
 $(t).append(m[ind++]);
@@ -134,12 +143,17 @@ ctr=1;
 
 }
 else{if(i==0){
-clearInterval(s);}
+clearInterval(s);
+clearInterval(mm);}
 else{
-clearInterval(q);}}
+clearInterval(q);
+clearInterval(mm);}}
 }
 $( "#a" ).click(function(){
-document.getElementById("clue").style.zIndex=200;
+cluehnd.style.zIndex=200;
+clearInterval(mm);
+clearInterval(q);
+clearInterval(s);
 if(ctr==1){
 clearInterval(q);
 clearInterval(mm);
@@ -153,10 +167,13 @@ m.autoplay=true;
 m.load();
 document.getElementById("msg").innerHTML="";
 s=setInterval(function(){show("#msg","The chimera is a monstrous fire-breathing creature  usually depicted as a lion, with the head of a goat arising from its back, and a tail that ended in a snake's head.Sighting a chimera is usually associated with bad luck.",ind++,0)},75);
-mm=setInterval(function(){movemouth()},100);
+mm=setInterval(function(){movemouth()},200);
 });
 $( "#b" ).click(function(){
-document.getElementById("clue").style.zIndex=200;
+clearInterval(mm);
+clearInterval(q);
+clearInterval(s);
+cluehnd.style.zIndex=200;
 if(ctr==1){
 clearInterval(s);
 clearInterval(mm);
@@ -170,7 +187,7 @@ m.autoplay=true;
 m.load();
 document.getElementById("msg").innerHTML="";
 q=setInterval(function(){show("#msg","I'm not one but of many.Put together many you get one.confused yet?",ind++,1)},75);
-mm=setInterval(function(){movemouth()},100);
+mm=setInterval(function(){movemouth()},200);
 document.getElementById("c").style.visibility="visible";
 });
 function check()
@@ -180,8 +197,8 @@ function check()
   
 }
 function change(){
-document.getElementById("clue").style.visibility="hidden";
-document.getElementById("clue").style.zIndex=-50;
+cluehnd.style.visibility="hidden";
+cluehnd.style.zIndex=-50;
 }
 $( "#c" ).click(function(){
 var m=document.getElementById("au2");
@@ -197,18 +214,22 @@ clearInterval(mm);
 ind=0;
 ctr=0;}
 document.getElementById("msg").innerHTML="";
-document.getElementById("clue").style.visibility="visible";
-document.getElementById("clue").style.zIndex=200;
+cluehnd.style.visibility="visible";
+cluehnd.style.zIndex=200;
 });
 var chec="<?php echo $_SESSION['check7']; ?>";
 if(chec=="1"){
 alert("Clue obtained! Added to inventory.");
 }
 function movemouth(){
-if(document.getElementById("chimera").src=="./maze/chimera.png"){
-document.getElementById("chimera").src="http://localhost/game/maze/chimera_open.png"}
-else if(document.getElementById("chimera").src=="http://localhost/game/maze/chimera_open.png"){
-document.getElementById("chimera").src="http://localhost/game/maze/chimera.png"}
+console.log(mm);
+if(chnd.style.display=="none"){
+chnd.style.display="block";
+cohnd.style.display="none";
+}
+else {
+chnd.style.display="none";
+cohnd.style.display="block";}
 }
 </script>
 </body>

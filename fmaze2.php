@@ -1,8 +1,7 @@
 <html>
 <?php
-session_start();
+include_once("config.lib.php");
 $s="";
-$con=mysqli_connect("localhost","root","","player");
 $sql = "SELECT x from position";
 $b=mysqli_query($con,$sql);
 $c=mysqli_fetch_array($b);
@@ -208,11 +207,33 @@ visibility:hidden;
 left:350px;
 position:absolute;
 top:250px;}
-#ghost2{
+#ghost2,#ghost5{
 visibility:hidden;
 left:350px;
 position:absolute;
 top:280px;}
+#ghost6{
+visibility:hidden;
+left:100px;
+position:absolute;
+top:60px;}
+#ghost4{
+visibility:hidden;
+left:280px;
+position:absolute;
+top:100px;}
+#ghost3{
+visibility:hidden;
+left:660px;
+position:absolute;
+top:470px;}
+#score{
+color:beige;
+font-family:chiller,Helvetica,Ariel,sans-seriff;
+font-size:40px;
+position:absolute;
+left:950px;
+top:10px;}
 </style>
 
 <script src="excanvas.js" type="text/javascript"></script>
@@ -230,9 +251,14 @@ top:280px;}
                   </p></div></pre>
 <div id="inventory1" onclick="makevisible()">INVENTORY</div>
 <img id="ghost1" src="ghost.gif" alt="g" width="10" height="10">
-<img id="ghost2" src="skele.gif" alt="g" width="260" height="260">
+<img id="ghost2" src="skeleton.gif" alt="s" width="260" height="260">
+<img id="ghost3" src="bleedrose.gif" alt="s" width="250" height="200">
+<img id="ghost4" src="bigeyes.gif" alt="s" width="10" height="10">
+<img id="ghost5" src="bats.gif" alt="s" width="50" height="10">
+<img id="ghost6" src="bats.gif" alt="s" width="50" height="10">
 </div>
 <div id="container"></div>
+<p id="score">Target hits:</p>
 <div id="pc1" class="pc">
 <audio id="audio" >
   <source src="howl.mp3" type="audio/mp3">
@@ -251,7 +277,7 @@ top:280px;}
 <input type="button" style="top:80%;left:85%;" name="back" value="back" onclick="moveback()">
 </form>
 </div>
-<div id="pc3" class="pc">
+<div id="pc3">
 <img id="bcg3" src="dementor.jpg" alt="bck3" width="1400px" height="650px">
 <p id="msg3"></p>
 <form name="form3" method="post" action="t13.php">
@@ -304,25 +330,34 @@ top:280px;}
 var $ = function(id) { return document.getElementById(id); };
 var dc = function(tag) { return document.createElement(tag); };
 
-var map = [
-	[1,2,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,2,1,1],
-	[1,4,1,3,4,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,3,0,1,1],
-	[1,0,0,3,4,0,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,1,4,0,3,0,0,1],
-	[1,0,0,3,4,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,3,0,0,1],
-	[1,0,0,3,4,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,1],
-	[1,0,0,3,4,0,0,0,0,0,0,1,0,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,3,0,0,1],
-	[1,0,0,0,4,0,0,0,0,0,0,1,3,1,1,1,2,1,1,3,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,4,0,0,0,0,0,0,1,3,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,4,0,0,0,0,1,0,0,3,3,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,0,0,0,0,0,1,0,0,0,3,3,0,0,3,3,0,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,0,0,0,0,0,1,0,0,0,0,3,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-	[1,0,0,3,4,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,1],
-	[1,0,0,3,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,1],
-	[1,0,0,3,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,1],
-	[1,0,0,3,1,1,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,1],
-	[1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,1,1],
-	[1,2,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,2,1,1]
+var map=[
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+	[1,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
+	[1,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1],
+	[1,0,0,0,0,4,0,0,0,0,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,0,0,1,0,1,0,0,1],
+	[1,0,0,0,0,4,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,1,0,1,0,0,1],
+	[1,4,4,4,4,4,0,0,0,0,0,0,0,0,1,1,2,1,0,0,0,0,0,0,0,1,0,0,1,0,1,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,0,0,1,0,0,1,0,1,0,0,1],
+	[1,1,1,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,1],
+	[1,2,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,1,1,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,0,1,1,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,2,0,0,0,1],
+	[1,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,1,0,0,0,1,1,1,1,1,0,0,1,1,1,0,0,1],
+	[1,0,0,1,0,0,0,0,0,0,0,0,1,2,1,1,0,1,0,4,4,4,4,4,4,1,0,0,0,0,0,0,0,1],
+	[1,0,0,1,0,0,1,1,1,1,0,0,1,0,0,1,0,1,0,4,0,0,0,0,0,1,1,1,1,1,1,0,0,1],
+	[1,0,0,1,0,0,1,0,0,0,0,0,1,0,0,1,0,1,0,4,0,0,0,0,0,1,0,0,0,0,1,0,0,1],
+	[1,0,0,1,0,0,1,0,0,0,0,0,1,0,0,1,0,1,0,4,0,0,0,0,0,1,0,0,0,0,1,0,0,1],
+	[1,0,0,1,0,0,1,0,0,0,1,1,1,0,0,1,0,1,0,4,1,2,1,0,0,1,2,1,0,0,1,0,0,1],
+	[1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,4,1,1,1,1,1,1,1,1,0,0,1,0,0,1],
+	[1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
+	[1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,1],
+	[1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,1],
+	[1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,0,0,1],
+	[1,2,1,1,0,0,1,2,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ];
 var a="<?php echo $_SESSION['x']; ?>";
 var b="<?php echo $_SESSION['y']; ?>";
@@ -332,8 +367,8 @@ var player = {
 	dir : 0,		// the direction that the player is turning, either -1 for left or 1 for right.
 	rot : 0,		// the current angle of rotation
 	speed : 0,		// is the playing moving forward (speed = 1) or backwards (speed = -1).
-	moveSpeed : 0.2,	// how far (in map units) does the player move each step/update
-	rotSpeed : 6 * Math.PI / 180	// how much does the player rotate each step/update (in radians)
+	moveSpeed : 0.4,	// how far (in map units) does the player move each step/update
+	rotSpeed : 7 * Math.PI / 180	// how much does the player rotate each step/update (in radians)
 }
 
 var mapWidth = 0;
@@ -356,13 +391,16 @@ var twoPI = Math.PI * 2;
 var numTextures = 4;
 var aa=0,bb=0,cc=0,dd=0,ee=0,ff=0,gg=0,hh=0;
 var a1=0,a2=0,a4=0,a5=0,a6=0,a7=0,a8=0,ct=0,z=0;
+var target=0,incell=0;
 function moveback(){
+
+incell=0;
 ct=0;
+document.getElementById("screen").style.visibility="visible";
 for(var i=1;i<9;i++){
 document.getElementById("pc"+i).style.visibility="hidden";
 document.getElementById("bcg"+i).width="100";
 document.getElementById("bcg"+i).height="100";}
-document.getElementById("screen").style.visibility="visible";
 clearInterval(a1);
 clearInterval(a2);
 clearInterval(a4);
@@ -382,12 +420,14 @@ z=setInterval(function(){cell()},50);
 }
 z=setInterval(function(){cell()},50);
 function cell(){
-if(player.x>16 && player.x<17 && player.y>7 && player.y<8){
+console.log(player.x);
+console.log(player.y);
+if(player.x>21 && player.x<22 && player.y>16 && player.y<17){incell=1;
 window.location.replace("finalcell.php");
 }
-if(player.x>1 && player.x<2 && player.y>1 && player.y<2){ct=1;
+if(player.x>7 && player.x<8 && player.y>22 && player.y<23){ct=1;incell=1;
 clearInterval(z);
-player.y+=2;
+player.y-=1;
 var m=document.getElementById("audio");
 m.autoplay=true;
 m.load();
@@ -412,9 +452,9 @@ clearInterval(a1);
 }
 }
 }
-if(player.x>6 && player.x<7 && player.y>1 && player.y<2){ct=1;
+if(player.x>13 && player.x<14 && player.y>14 && player.y<15){ct=1;incell=1;
 clearInterval(z);
-player.y+=2;
+player.y+=1;
 var m=document.getElementById("audio");
 m.autoplay=true;
 m.load();
@@ -439,8 +479,11 @@ clearInterval(a2);
 }
 }
 }
-if(player.x>25 && player.x<26 && player.y>1 && player.y<2){ct=1;
-player.y+=2;
+if(player.x>1 && player.x<2 && player.y>9 && player.y<10){ct=1;incell=1;
+player.y+=1;
+document.getElementById("bcg3").src="dementor.jpg";
+document.getElementById("bcg3").style.width="1400px";
+document.getElementById("bcg3").style.height="650px";
 clearInterval(z);
 var m=document.getElementById("audio");
 m.autoplay=true;
@@ -462,9 +505,9 @@ function swap(){
 document.getElementById("bcg3").src="dementors.jpg";
 }
 }
-if(player.x>29 && player.x<30 && player.y>1 && player.y<2){ct=1;
+if(player.x>1 && player.x<2 && player.y>24 && player.y<25){ct=1;incell=1;
 clearInterval(z);
-player.y+=2;
+player.y+=1;
 var m=document.getElementById("audio");
 m.autoplay=true;
 m.load();
@@ -489,9 +532,9 @@ clearInterval(a4);
 }
 }
 }
-if(player.x>1&& player.x<2 && player.y>16 && player.y<17){ct=1;
+if(player.x>16 && player.x<17 && player.y>4 && player.y<5){ct=1;incell=1;
 clearInterval(z);
-player.y-=2;
+player.y-=1;
 var m=document.getElementById("audio");
 m.autoplay=true;
 m.load();
@@ -516,9 +559,9 @@ clearInterval(a5);
 }
 }
 }
-if(player.x>6&& player.x<7 && player.y>16 && player.y<17){ct=1;
+if(player.x>30 && player.x<31 && player.y>11 && player.y<12){ct=1;incell=1;
 clearInterval(z);
-player.y-=2;
+player.x+=1;
 var m=document.getElementById("audio");
 m.autoplay=true;
 m.load();
@@ -543,9 +586,9 @@ clearInterval(a6);
 }
 }
 }
-if(player.x>25&& player.x<26 && player.y>16 && player.y<17){ct=1;
+if(player.x>26 && player.x<27 && player.y>16 && player.y<17){ct=1;incell=1;
 clearInterval(z);
-player.y-=2;
+player.y-=1;
 var m=document.getElementById("audio");
 m.autoplay=true;
 m.load();
@@ -570,9 +613,9 @@ clearInterval(a7);
 }
 }
 }
-if(player.x>29&& player.x<30 && player.y>16 && player.y<17){ct=1;
+if(player.x>19 && player.x<20 && player.y>1 && player.y<2){ct=1;incell=1;
 clearInterval(z);
-player.y-=2;
+player.x+=1;
 var m=document.getElementById("audio");
 m.autoplay=true;
 m.load();
@@ -628,7 +671,7 @@ function initScreen() {
 		strip.style.backgroundColor = "transparent";
 
 		var img = new Image();
-		img.src = (window.opera ? "walls_19color.png" : "wall6.png");
+		img.src = (window.opera ? "walls_19color.png" : "wall.png");
 		img.style.position = "absolute";
 		img.style.left = "0px";
 
@@ -1012,9 +1055,9 @@ function makeinvisible()
           height: 71
 		  }],
 		
-      };
+      };var blobmove=0;
 	  setInterval(function(){
-	  if(anim==0){
+	  if(anim==0 && incell==0){clearInterval(blobmove);
 	  i=Math.floor(Math.random()*2);
       var imageObj = new Image();
       imageObj.onload = function() {
@@ -1034,14 +1077,14 @@ function makeinvisible()
 		anim=1;
 		};
 		switch(i){
-		case 0:imageObj.src = 'blob.png';blobw=20;document.getElementById("container").style.top=-400;mv=150;break;
-		case 1:imageObj.src = 'snake.gif';blobw=40;document.getElementById("container").style.top=-800;mv=250;break;}}
-	  if(flag==1){
-var blobmove=setInterval(function(){move1()},mv);
+		case 0:imageObj.src = 'blob2.png';blobw=20;document.getElementById("container").style.top=-400;mv=150;break;
+		case 1:imageObj.src = 'snake2.png';blobw=20;document.getElementById("container").style.top=-800;mv=250;break;}}
+	  if(flag==1){clearInterval(blobmove);
+blobmove=setInterval(function(){move1()},mv);
 var count=0;
 function move1(){
 blob.setX(blob.getX()+10);
-if(blob.getX()==1000 || count==5){
+if(blob.getX()==1000 || count==5 || incell==1){
 blob.stop();
 anim=0;
 blob.remove();
@@ -1054,6 +1097,8 @@ document.onclick=function(evt) {
     evt = (evt || event);
     if(evt.clientX>(blob.getX()+200-blobw) && evt.clientX<(blob.getX()+200+blobw)){
 	count++;
+	target++;
+	document.getElementById("score").innerHTML="TargetHits:"+target;
 	blob.setAnimation('punch'+i);
           var fr;
 		  if(i==0){fr=2;}
@@ -1064,12 +1109,11 @@ document.onclick=function(evt) {
 }
 }}
 flag=0;}
-},1000);
-	  var change=30,ganim=0,ghsot=0,g;
+},120000);
+	  var change=30,change1=50,change2=30,ganim=0,g,j;
 	  setInterval(function(){
-	  if(ganim==0){
-	  j=Math.floor(Math.random()*2+1);
-	
+	  if(ganim==0 && incell==0){
+	  j=Math.floor(Math.random()*5+1);
 	  if(j==1){
 	ghost= setInterval(function(){
 	g=document.getElementById("ghost1");
@@ -1095,11 +1139,59 @@ flag=0;}
 	g=document.getElementById("ghost2");
 	  g.style.visibility="visible";
 	  g.style.zIndex=700;ganim=1;}
+	  if(j==4){
+	  ghost= setInterval(function(){
+	g=document.getElementById("ghost4");
+	  g.style.visibility="visible";
+	  g.style.zIndex=700;
+	  g.height+=change1;
+	  g.width+=change1;
+	  if(g.height>=500){
+	  change1=-50;}
+	  if(g.height==10 && change1==-50){
+	  change1=50;
+	  g.style.visibility="hidden";
+	  g.style.zIndex=-100;
+	  g.height=10;
+	  g.width=10;
+	  ganim=0;
+	  clearInterval(ghost);
 	  }
-	  else if(j==2 && ganim==1){
+	  },200);ganim=1;}
+	  if(j==3){
+	  g=document.getElementById("ghost3");
+	  g.style.visibility="visible";
+	  g.style.zIndex=700;ganim=1;}
+	  if(j==5){ghost= setInterval(function(){var g1;
+	g=document.getElementById("ghost5");
+	  g.style.visibility="visible";
+	  g.style.zIndex=700;
+	  g.height+=30;
+	  g.width+=30;
+	  g1=document.getElementById("ghost6");
+	  g1.style.visibility="visible";
+	  g1.style.zIndex=700;
+	  g1.height+=30;
+	  g1.width+=30;
+	  if(g.height>=650){
+	  g.style.visibility="hidden";
+	  g.style.zIndex=-100;
+	  g.height=10;
+	  g.width=50;
+	  g1.style.visibility="hidden";
+	  g1.style.zIndex=-100;
+	  g1.height=10;
+	  g1.width=50;
+	  ganim=0;
+	  clearInterval(ghost);
+	  }
+	  },200);ganim=1;}
+	 
+	  }
+	  else if((j==2 || j==3)&& ganim==1){
 	  g.style.visibility="hidden";
 	  g.style.zIndex=-100;ganim=0;}
-	 },5000);
+	 },180000);
     </script>
 <audio autoplay="autoplay" loop="loop">
   

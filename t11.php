@@ -1,19 +1,13 @@
 <html>
 <?php
-session_start();
+include("config.lib.php");
 if(!isset($_SESSION['check1'])){
 $_SESSION['check1']=0;}
 $a=0;
-$con=mysqli_connect("localhost","root","","player");
-$sql="UPDATE position SET x='1'";
+$sql="UPDATE position SET x='8.9'";
 if(mysqli_query($con,$sql));
-$con=mysqli_connect("localhost","root","","player");
-$sql="UPDATE position SET y='4'";
+$sql="UPDATE position SET y='20.4'";
 if(mysqli_query($con,$sql));
-if(isset($_POST["sub"])){
-if($_POST["ans"]=="fenrir greyback"){
-$a=1;
-}}
 ?>
 <style>
 body{
@@ -88,10 +82,10 @@ border-radius:5px;
 </style>
 <body>
 <audio id="au1">
-<source src="wolf12.wav" type="audio/wav">
+<source src="wolf12.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="wolf11.wav" type="audio/wav">
+<source src="wolf11.mp3" type="audio/mp3">
 </audio>
 <canvas id="canv" width="1334px" height="720px"></canvas>
 <div id="clue" style="border-style:double;color:red;border-width:5px;"><pre>WHO AM I?
@@ -106,9 +100,9 @@ border-radius:5px;
 <img id="w" src="wood.jpg" alt="wood" width="100%" height="25%">
 <img id="f" src="frame.jpg" alt="frame" width="100%" height="25%">
 </div>
-<p  id="a" style="top:90%;" >Tell me about werewolves.</p>
-<p  id="b" style="top:95%;" >Can you give me some Info about the Thief.</p>
-<p  id="c" class="HL" style="top:99%;" >yes.</p>
+<p  id="a" style="top:93%;" >Tell me about werewolves.</p>
+<p  id="b" style="top:98%;" >Can you give me some Info about the Thief.</p>
+<p  id="c" style="top:95%;font-size:50px;" >yes.</p>
 <h3 id="msg"></h3>
 <form name="form2" action="fmaze2.php" method="post">
 <input id="back" type="submit" value="back" name="back">
