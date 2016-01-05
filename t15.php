@@ -2,11 +2,12 @@
 <html>
 <?php
 include("config.lib.php");
+session_start();
 if(!isset($_SESSION['check5'])){
 $_SESSION['check5']=0;}
-$sql="UPDATE position SET x='16'";
+$sql="UPDATE position SET x='1'";
 if(mysqli_query($con,$sql));
-$sql="UPDATE position SET y='2'";
+$sql="UPDATE position SET y='14'";
 if(mysqli_query($con,$sql));
 ?>
 <style>
@@ -83,7 +84,7 @@ top:2%;
  font-size:50px;
  font-color:green;
  background-position:right bottom;
- background-image:url(vamp2.jpg);
+ background-image:url(images/vamp2.jpg);
  background-repeat:no-repeat;
  background-color:red;
  background-size:100% 100%;
@@ -104,10 +105,10 @@ display:none;}
 </style>
 <body>
 <audio id="au1">
-<source src="vamp2.mp3" type="audio/mp3">
+<source src="sounds/vamp2.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="vamp1.mp3" type="audio/mp3">
+<source src="sounds/vamp1.mp3" type="audio/mp3">
 </audio>
 <div id="clue" style="border-style:double;color:#64FE2E;border-width:5px;"><pre> ARE YOU A VAMPIRE?
 
@@ -116,16 +117,16 @@ display:none;}
  <input type="submit" style="height:50px;width:200px;font-size:30px;" value="Submit"/>            <input type="button" style="height:50px;width:150px;font-size:30px;" value="Back" onclick="change()"/></form>
  </pre>
   </div>
-<img id="vampire" src="vampireopen1.jpg" width="750px" height="500px">
-<img id="vampireopen" src="vampireopen2.jpg" width="750px" height="500px">
-<img id="vamp" src="vampirebcg.jpg" width="1000px" height="460px">
+<img id="vampire" src="images/vampireopen1.jpg" width="750px" height="500px">
+<img id="vampireopen" src="images/vampireopen2.jpg" width="750px" height="500px">
+<img id="vamp" src="images/vampirebcg.jpg" width="1000px" height="460px">
 <div>
-<img id="w" src="wood.jpg" alt="wood" width="1000px" height="150px">
-<img id="f" src="frame.jpg" alt="frame" width="1000px" height="150px">
+<img id="w" src="images/wood.jpg" alt="wood" width="1000px" height="150px">
+<img id="f" src="images/frame.jpg" alt="frame" width="1000px" height="150px">
 </div>
 <p  id="a" style="top:-310px;" >Tell me about vampires.</p>
 <p  id="b" style="top:-150px;" >Will you give me some information about the thief?</p>
-<p  id="c" style="top:-4px;font-size:50px;" >Okay.</p>
+<p  id="c" class="HL" style="top:-4px;" >Okay.</p>
 <h3 id="msg"></h3>
 <form action="fmaze2.php" method="post">
 <input id="back" type="submit" value="back" name="back">

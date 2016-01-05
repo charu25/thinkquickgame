@@ -95,16 +95,16 @@ background: #ffff00;
 </style>
 <body>
 <audio id="au1">
-<source src="dem2.mp3" type="audio/mp3">
+<source src="sounds/dem2.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="dem1.mp3" type="audio/mp3">
+<source src="sounds/dem1.mp3" type="audio/mp3">
 </audio>
-<img id="dementor" src="dem2.png" width="340px" height="350px">
-<img id="dem" src="dem.gif" width="1000px" height="600px">
+<img id="dementor" src="images/dem2.png" width="340px" height="350px">
+<img id="dem" src="images/dem.gif" width="1000px" height="600px">
 <div>
-<img id="w" src="wood.jpg" alt="wood" width="1000px" height="150px">
-<img id="f" src="frame.jpg" alt="frame" width="1000px" height="150px">
+<img id="w" src="images/wood.jpg" alt="wood" width="1000px" height="150px">
+<img id="f" src="images/frame.jpg" alt="frame" width="1000px" height="150px">
 </div>
 <div id="words">
 <p  id="a" style="top:-150px;" >Tell me about dementors.</p>

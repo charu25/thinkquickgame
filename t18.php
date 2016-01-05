@@ -77,7 +77,7 @@ top:2%;
  font-size:50px;
  font-color:green;
  background-position:right bottom;
- background-image:url(bluebg.jpg);
+ background-image:url(images/bluebg.jpg);
  background-repeat:no-repeat;
  background-color:red;
  background-size:100% 100%;
@@ -95,21 +95,21 @@ background: #ffff00;
 </style>
 <body>
 <div id="clue" ><pre>
-   <img src="riddle2.jpg" alt="cipher"/>
+   <img src="images/riddle2.jpg" alt="cipher"/>
   <form name="form1" method="post" action="check.php">
     <input type="text" style="height:50px;width:200px;font-size:30px;" id="ans" name="ans8"/> <input type="submit" style="height:50px;width:150px;font-size:30px;" value="Submit"/> <input type="button" style="height:50px;width:150px;font-size:30px;" value="back" onclick="change()"/></form>
  </pre>
   </div>
 <audio id="au1">
-<source src="whitewalker2.mp3" type="audio/mp3">
+<source src="sounds/whitewalker2.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="whitewalker1.mp3" type="audio/mp3">
+<source src="sounds/whitewalker1.mp3" type="audio/mp3">
 </audio>
-<img id="white" src="whitewalker.png" width="1000px" height="560px">
+<img id="white" src="images/whitewalker.png" width="1000px" height="560px">
 <div>
-<img id="w" src="wood.jpg" alt="wood" width="1000px" height="150px">
-<img id="f" src="frame.jpg" alt="frame" width="1000px" height="150px">
+<img id="w" src="images/wood.jpg" alt="wood" width="1000px" height="150px">
+<img id="f" src="images/frame.jpg" alt="frame" width="1000px" height="150px">
 </div>
 <p  id="a" style="top:-150px;" >Tell me about white walkers.</p>
 <p  id="b" style="top:-190px;" >Can you give me some information about the thief?</p>

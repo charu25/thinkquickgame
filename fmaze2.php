@@ -234,6 +234,14 @@ font-size:40px;
 position:absolute;
 left:950px;
 top:10px;}
+#clap{
+width:150px;
+height:40px;
+background-color:red;
+position:absolute;
+left:10px;
+top:20px;
+z-index:300;}
 </style>
 
 <script src="excanvas.js" type="text/javascript"></script>
@@ -256,12 +264,19 @@ top:10px;}
 <img id="ghost4" src="bigeyes.gif" alt="s" width="10" height="10">
 <img id="ghost5" src="bats.gif" alt="s" width="50" height="10">
 <img id="ghost6" src="bats.gif" alt="s" width="50" height="10">
+<input type="button" id="clap" onclick="clap()" value="Gimme a clap" name="Gimme a clap">
 </div>
 <div id="container"></div>
-<p id="score">Target hits:</p>
+<p id="score">Target Hits:</p>
 <div id="pc1" class="pc">
 <audio id="audio" >
   <source src="howl.mp3" type="audio/mp3">
+</audio>
+<audio id="audio1" >
+  <source src="clap1.mp3" type="audio/mp3">
+</audio>
+<audio id="audio2" >
+  <source src="clap2.mp3" type="audio/mp3">
 </audio>
 <img id="bcg1" src="bw.jpg" alt="bck1" width="100px" height="100px">
 <p id="msg1"></p>
@@ -420,12 +435,14 @@ z=setInterval(function(){cell()},50);
 }
 z=setInterval(function(){cell()},50);
 function cell(){
-console.log(player.x);
-console.log(player.y);
 if(player.x>21 && player.x<22 && player.y>16 && player.y<17){incell=1;
 window.location.replace("finalcell.php");
 }
-if(player.x>7 && player.x<8 && player.y>22 && player.y<23){ct=1;incell=1;
+if(player.x>7 && player.x<8 && player.y>22 && player.y<23){blob.stop();
+anim=0;
+blob.remove();
+layer.remove();
+clearInterval(blobmove);ct=1;incell=1;
 clearInterval(z);
 player.y-=1;
 var m=document.getElementById("audio");
@@ -452,7 +469,11 @@ clearInterval(a1);
 }
 }
 }
-if(player.x>13 && player.x<14 && player.y>14 && player.y<15){ct=1;incell=1;
+if(player.x>13 && player.x<14 && player.y>14 && player.y<15){blob.stop();
+anim=0;
+blob.remove();
+layer.remove();
+clearInterval(blobmove);ct=1;incell=1;
 clearInterval(z);
 player.y+=1;
 var m=document.getElementById("audio");
@@ -479,7 +500,11 @@ clearInterval(a2);
 }
 }
 }
-if(player.x>1 && player.x<2 && player.y>9 && player.y<10){ct=1;incell=1;
+if(player.x>1 && player.x<2 && player.y>9 && player.y<10){blob.stop();
+anim=0;
+blob.remove();
+layer.remove();
+clearInterval(blobmove);ct=1;incell=1;
 player.y+=1;
 document.getElementById("bcg3").src="dementor.jpg";
 document.getElementById("bcg3").style.width="1400px";
@@ -505,7 +530,11 @@ function swap(){
 document.getElementById("bcg3").src="dementors.jpg";
 }
 }
-if(player.x>1 && player.x<2 && player.y>24 && player.y<25){ct=1;incell=1;
+if(player.x>1 && player.x<2 && player.y>24 && player.y<25){blob.stop();
+anim=0;
+blob.remove();
+layer.remove();
+clearInterval(blobmove);ct=1;incell=1;
 clearInterval(z);
 player.y+=1;
 var m=document.getElementById("audio");
@@ -532,7 +561,11 @@ clearInterval(a4);
 }
 }
 }
-if(player.x>16 && player.x<17 && player.y>4 && player.y<5){ct=1;incell=1;
+if(player.x>16 && player.x<17 && player.y>4 && player.y<5){blob.stop();
+anim=0;
+blob.remove();
+layer.remove();
+clearInterval(blobmove);ct=1;incell=1;
 clearInterval(z);
 player.y-=1;
 var m=document.getElementById("audio");
@@ -559,7 +592,11 @@ clearInterval(a5);
 }
 }
 }
-if(player.x>30 && player.x<31 && player.y>11 && player.y<12){ct=1;incell=1;
+if(player.x>30 && player.x<31 && player.y>11 && player.y<12){blob.stop();
+anim=0;
+blob.remove();
+layer.remove();
+clearInterval(blobmove);ct=1;incell=1;
 clearInterval(z);
 player.x+=1;
 var m=document.getElementById("audio");
@@ -586,7 +623,11 @@ clearInterval(a6);
 }
 }
 }
-if(player.x>26 && player.x<27 && player.y>16 && player.y<17){ct=1;incell=1;
+if(player.x>26 && player.x<27 && player.y>16 && player.y<17){blob.stop();
+anim=0;
+blob.remove();
+layer.remove();
+clearInterval(blobmove);ct=1;incell=1;
 clearInterval(z);
 player.y-=1;
 var m=document.getElementById("audio");
@@ -613,7 +654,11 @@ clearInterval(a7);
 }
 }
 }
-if(player.x>19 && player.x<20 && player.y>1 && player.y<2){ct=1;incell=1;
+if(player.x>19 && player.x<20 && player.y>1 && player.y<2){blob.stop();
+anim=0;
+blob.remove();
+layer.remove();
+clearInterval(blobmove);ct=1;incell=1;
 clearInterval(z);
 player.x+=1;
 var m=document.getElementById("audio");
@@ -641,7 +686,29 @@ clearInterval(a8);
 }
 }
 }
-
+function clap(){
+var a=-1;
+var b=[7,13,1,1,16,30,26,19];
+var c=[22,14,9,24,4,11,16,1];
+for(var i=0;i<7;i++){
+if(b[i]>(player.x-3) && b[i]<(player.x+3)){
+if(c[i]>(player.y-3) && c[i]<(player.y+3)){a=0;var m=document.getElementById("audio2");
+m.autoplay=true;
+m.load();var m=document.getElementById("audio3");
+m.autoplay=false;
+m.load();break;}}}
+if(a==-1){
+for(var i=0;i<7;i++){
+if(b[i]>(player.x-5) && b[i]<(player.x+5)){
+if(c[i]>(player.y-5) && c[i]<(player.y+5)){var m=document.getElementById("audio1");
+m.autoplay=true;
+m.load();var m=document.getElementById("audio3");
+m.autoplay=false;
+m.load();break;}}}}
+var m=document.getElementById("audio3");
+m.autoplay=true;
+m.load();
+}
 function init() {
 
 	mapWidth = map[0].length;
@@ -1109,7 +1176,7 @@ document.onclick=function(evt) {
 }
 }}
 flag=0;}
-},120000);
+},12000);
 	  var change=30,change1=50,change2=30,ganim=0,g,j;
 	  setInterval(function(){
 	  if(ganim==0 && incell==0){
@@ -1191,9 +1258,9 @@ flag=0;}
 	  else if((j==2 || j==3)&& ganim==1){
 	  g.style.visibility="hidden";
 	  g.style.zIndex=-100;ganim=0;}
-	 },180000);
+	 },10000);
     </script>
-<audio autoplay="autoplay" loop="loop">
+<audio id="audio3" autoplay="autoplay" loop="loop">
   
   <source src="conjuring.mp3" type="audio/mpeg">
 Your browser does not support the audio element.

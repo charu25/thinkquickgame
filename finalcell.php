@@ -10,7 +10,7 @@ exit;
 <style>
 body{
 background-color:black;
-background-image:url(fcell.jpg);
+background-image:url(images/fcell.jpg);
 background-size:100% 100%;
 background-repeat:no-repeat;
 }

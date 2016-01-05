@@ -82,7 +82,7 @@ margin-top:20px;
  font-size:50px;
  font-color:green;
  background-position:right bottom;
- background-image:url(whitebg.jpg);
+ background-image:url(images/whitebg.jpg);
  background-repeat:no-repeat;
  background-color:red;
  background-size:100% 100%;
@@ -105,19 +105,19 @@ background: #ffff00;
 <input id="back" type="submit" value="back" name="back">
 </form>
 <audio id="au1">
-<source src="mummy1.mp3" type="audio/mp3">
+<source src="sounds/mummy1.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="mummy2.mp3" type="audio/mp3">
+<source src="sounds/mummy2.mp3" type="audio/mp3">
 </audio>
-<img id="mummy" src="mummy.gif" width="200px" height="250px">
-<img id="grave" src="graveyard.jpg" width="1000px" height="550px">
+<img id="mummy" src="images/mummy.gif" width="200px" height="250px">
+<img id="grave" src="images/graveyard.jpg" width="1000px" height="550px">
 <div>
-<img id="w" src="wood.jpg" alt="wood" width="1000px" height="150px">
-<img id="f" src="frame.jpg" alt="frame" width="1000px" height="150px">
+<img id="w" src="images/wood.jpg" alt="wood" width="1000px" height="150px">
+<img id="f" src="images/frame.jpg" alt="frame" width="1000px" height="150px">
 </div>
 <div id="clue" ><pre>
-   <img id="rid" src="riddle.png" style="height:70%;width:50%;"alt="cipher"/><form method="post" action="check.php">
+   <img id="rid" src="images/riddle.png" style="height:70%;width:50%;"alt="cipher"/><form method="post" action="check.php">
    <input type="text"  style="height:40px;width:200px;font-size:30px;" id="ans" name="ans4"/> <input type="submit"  style="height:40px;width:200px;font-size:30px;" value="Submit" /> <input type="button" style="height:40px;width:200px;font-size:30px;" value="back" onclick="change()"/></pre></form>
   </div>
 <p  id="a" style="top:-150px;" >Tell me about mummies.</p>
