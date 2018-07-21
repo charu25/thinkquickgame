@@ -43,7 +43,7 @@ z-index:-10;
 h3{
 position:relative;
 font-family:chiller,Helvetica,Ariel,sans-seriff;
-font-size:35px;
+font-size:20px;
 text-align:left;
 left:250px;
 top:-1100px;
@@ -105,31 +105,31 @@ display:none;}
 </style>
 <body>
 <audio id="au1">
-<source src="sounds/chimera2.mp3" type="audio/mp3">
+<source src="../sounds/chimera2.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="sounds/chimera1.mp3" type="audio/mp3">
+<source src="../sounds/chimera1.mp3" type="audio/mp3">
 </audio>
 <div id="clue" ><pre>
-   <img src="images/cipher3.png" alt="cipher"/><form method="post" action="check.php">
+   <img src="../images/cipher3.png" alt="cipher"/><form method="post" action="check.php">
   <input type="text" style="height:50px;width:200px;font-size:30px;" name="ans7" id="ans" /> <input type="submit" style="height:50px;width:150px;font-size:30px;" value="Submit"/> <input type="button" style="height:50px;width:150px;font-size:30px;" value="Back" onclick="change()"/></form>
  </pre>
   </div>
-<img id="chimera" src="images/chimera.png" width="500px" height="400px">
-<img id="chimeraopen" src="images/chimera_open.png" width="500px" height="400px">
-<img id="cave" src="images/cave1.jpg" width="1000px" height="480px">
+<img id="chimera" src="../images/chimera.png" width="500px" height="400px">
+<img id="chimeraopen" src="../images/chimera_open.png" width="500px" height="400px">
+<img id="cave" src="../images/cave1.jpg" width="1000px" height="480px">
 <div>
-<img id="w" src="images/wood.jpg" alt="wood" width="1000px" height="150px">
-<img id="f" src="images/frame.jpg" alt="frame" width="1000px" height="150px">
+<img id="w" src="../images/wood.jpg" alt="wood" width="1000px" height="150px">
+<img id="f" src="../images/frame.jpg" alt="frame" width="1000px" height="150px">
 </div>
 <p  id="a" style="top:-450px;" >Tell me about a chimera.</p>
 <p  id="b" style="top:-490;" >Can you give me some Info about the Thief.</p>
 <p  id="c" class="HL" style="top:-540;" >yes.</p>
 <h3 id="msg"></h3>
-<form name="form7" action="fmaze2.php" method="post">
+<form name="form7" action="../fmaze2.php" method="post">
 <input type="submit" id="back" value="back" name="back">
 </form>
-<script src="jquery.js">
+<script src="../js/jquery.js">
 </script>
 <script type="text/javascript">
 var ind=0,ctr=0,s,q,mm=0;

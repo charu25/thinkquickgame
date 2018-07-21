@@ -43,7 +43,7 @@ z-index:-10;
 h3{
 position:relative;
 font-family:chiller,Helvetica,Ariel,sans-seriff;
-font-size:35px;
+font-size:20px;
 text-align:left;
 left:250px;
 top:-700px;
@@ -85,7 +85,7 @@ top:2%;
  font-size:50px;
  font-color:red;
  background-position:right bottom;
- background-image:url(images/dragonbg1.jpg);
+ background-image:url(../images/dragonbg1.jpg);
  background-size:100% 100%;
  background-repeat:no-repeat;
  background-color:red;
@@ -102,32 +102,32 @@ top:2%;
 <body>
 <div id="clue" style="border-style:double;color:red;border-width:5px;"> WHO AM I?</br>
 
- <img src="images/dragon.jpg"/></br>
- <form name="form1" method="post" action="check.php"></br>
+ <img src="../images/dragon.jpg"/></br>
+ <form name="form1" method="post" action="../check.php"></br>
  <input type="text" style="height:50px;width:300px;font-size:30px;" name="ans2" id="ans2" /> 
  <input type="submit" style="height:50px;width:200px;font-size:30px;top:85%" value="Submit"/></form>   
  <input type="button" style="height:50px;width:200px;font-size:30px;left:65%;position:absolute;top:83%" value="Back" onclick="change()"/>
   </div>
-<form action="fmaze2.php" method="post">
+<form action="../fmaze2.php" method="post">
 <input id="back" type="submit" value="back" name="back">
 </form>
 <audio id="au1">
-<source src="sounds/dragon2.mp3" type="audio/mp3">
+<source src="../sounds/dragon2.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="sounds/dragon1.mp3" type="audio/mp3">
+<source src="../sounds/dragon1.mp3" type="audio/mp3">
 </audio>
-<img id="drag" src="images/dragon.gif" width="60%" height="70%">
-<img id="fire" src="images/fire.jpg" width="1000px" height="400px">
+<img id="drag" src="../images/dragon.gif" width="60%" height="70%">
+<img id="fire" src="../images/fire.jpg" width="1000px" height="400px">
 <div>
-<img id="w" src="images/wood.jpg" alt="wood" width="1000px" height="150px">
-<img id="f" src="images/frame.jpg" alt="frame" width="1000px" height="150px">
+<img id="w" src="../images/wood.jpg" alt="wood" width="1000px" height="150px">
+<img id="f" src="../images/frame.jpg" alt="frame" width="1000px" height="150px">
 </div>
 <p  id="a" style="top:-150px;" >Tell me about dragons.</p>
 <p  id="b" style="top:-190px;" >Will you give me some information about the thief?</p>
 <p  id="c" style="top:-240px;font-size:50px;" >Okay.</p>
 <h3 id="msg"></h3>
-<script src="jquery.js">
+<script src="../js/jquery.js">
 </script>
 <script type="text/javascript">
 var ind=0,ctr=0,s,q;
@@ -207,7 +207,7 @@ cluehnd.style.visibility="visible";
 cluehnd.style.zIndex=200;
 });
 $("#back").click(function(){
-window.location.replace("fmaze2.php");
+window.location.replace("../fmaze2.php");
 });		
 var chec="<?php echo $_SESSION['check2']; ?>";
 if(chec=="1"){

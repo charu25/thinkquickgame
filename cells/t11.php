@@ -50,7 +50,7 @@ top:2%;
 h3{
 position:relative;
 font-family:chiller,Helvetica,Ariel,sans-seriff;
-font-size:35px;
+font-size:20px;
 text-align:left;
 padding-left:20%;
 top:-150%;
@@ -65,7 +65,7 @@ visibility:hidden;
  font-size:50px;
  font-color:red;
  background-position:right bottom;
- background-image:url(images/halloween1.jpg);
+ background-image:url(../images/halloween1.jpg);
  background-repeat:no-repeat;
  background-color:red;
  height:60%;
@@ -82,10 +82,10 @@ border-radius:5px;
 </style>
 <body>
 <audio id="au1">
-<source src="sounds/wolf12.mp3" type="audio/mp3">
+<source src="../sounds/wolf12.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="sounds/wolf11.mp3" type="audio/mp3">
+<source src="../sounds/wolf11.mp3" type="audio/mp3">
 </audio>
 <canvas id="canv" width="1334px" height="720px"></canvas>
 <div id="clue" style="border-style:double;color:red;border-width:5px;"><pre>WHO AM I?
@@ -97,17 +97,17 @@ border-radius:5px;
  </pre>
   </div>
 <div>
-<img id="w" src="images/wood.jpg" alt="wood" width="100%" height="25%">
-<img id="f" src="images/frame.jpg" alt="frame" width="100%" height="25%">
+<img id="w" src="../images/wood.jpg" alt="wood" width="100%" height="25%">
+<img id="f" src="../images/frame.jpg" alt="frame" width="100%" height="25%">
 </div>
 <p  id="a" style="top:93%;" >Tell me about werewolves.</p>
 <p  id="b" style="top:98%;" >Can you give me some Info about the Thief.</p>
 <p  id="c" style="top:95%;font-size:50px;" >yes.</p>
 <h3 id="msg"></h3>
-<form name="form2" action="fmaze2.php" method="post">
+<form name="form2" action="../fmaze2.php" method="post">
 <input id="back" type="submit" value="back" name="back">
 </form>
-<script src="jquery.js">
+<script src="../js/jquery.js">
 </script>
 <script type="text/javascript">
 var w="<?php echo $a; ?>"; 
@@ -119,7 +119,7 @@ alert("yes!!");
         var ctx = canvas.getContext('2d');
 
 		var myimage = new Image();
-myimage.src = 'images/wolfs.png';
+myimage.src = '../images/wolfs.png';
 myimage.onload = function() {
                      ctx.drawImage(myimage, 0, 0,1334,560);
                  }

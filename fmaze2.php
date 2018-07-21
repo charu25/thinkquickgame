@@ -122,7 +122,7 @@ div#ceiling {
  position : absolute;
  width : 100%;
  height : 50%;
- background-image:url('sky0.gif');
+ background-image:url('images/sky0.gif');
  background-color : rgb(96,96,96);
  background-repeat:no-repeat;
  background-size:100% 100%;
@@ -157,7 +157,7 @@ border:0;
  font-color:red;
  background:color:transparent;
  background-position:center;
- background-image:url(scroll2.png);
+ background-image:url(images/scroll2.png);
  background-size:100% 100%;
  background-repeat:no-repeat;
  height:400px;
@@ -188,7 +188,7 @@ body {
  color:white;
  background:color:transparent;
  background-position:center;
- background-image:url(scroll1.png);
+ background-image:url(images/scroll1.png);
  background-position:left bottom;
  background-size:50% 50%;
  background-repeat:no-repeat;
@@ -244,8 +244,8 @@ top:20px;
 z-index:300;}
 </style>
 
-<script src="excanvas.js" type="text/javascript"></script>
-<script src="jquery.js">
+<script src="js/excanvas.js" type="text/javascript"></script>
+<script src="js/jquery.js">
 </script>
 </head>
 <body id="body">
@@ -258,84 +258,84 @@ z-index:300;}
 <p id="words">                   CODE OBTAINED:
                   </p></div></pre>
 <div id="inventory1" onclick="makevisible()">INVENTORY</div>
-<img id="ghost1" src="ghost.gif" alt="g" width="10" height="10">
-<img id="ghost2" src="skeleton.gif" alt="s" width="260" height="260">
-<img id="ghost3" src="bleedrose.gif" alt="s" width="250" height="200">
-<img id="ghost4" src="bigeyes.gif" alt="s" width="10" height="10">
-<img id="ghost5" src="bats.gif" alt="s" width="50" height="10">
-<img id="ghost6" src="bats.gif" alt="s" width="50" height="10">
+<img id="ghost1" src="images/ghost.gif" alt="g" width="10" height="10">
+<img id="ghost2" src="images/skeleton.gif" alt="s" width="260" height="260">
+<img id="ghost3" src="images/bleedrose.gif" alt="s" width="250" height="200">
+<img id="ghost4" src="images/bigeyes.gif" alt="s" width="10" height="10">
+<img id="ghost5" src="images/bats.gif" alt="s" width="50" height="10">
+<img id="ghost6" src="images/bats.gif" alt="s" width="50" height="10">
 <input type="button" id="clap" onclick="clap()" value="Gimme a clap" name="Gimme a clap">
 </div>
 <div id="container"></div>
 <p id="score">Target Hits:</p>
 <div id="pc1" class="pc">
 <audio id="audio" >
-  <source src="howl.mp3" type="audio/mp3">
+  <source src="sounds/howl.mp3" type="audio/mp3">
 </audio>
 <audio id="audio1" >
-  <source src="clap1.mp3" type="audio/mp3">
+  <source src="sounds/clap1.mp3" type="audio/mp3">
 </audio>
 <audio id="audio2" >
-  <source src="clap2.mp3" type="audio/mp3">
+  <source src="sounds/clap2.mp3" type="audio/mp3">
 </audio>
-<img id="bcg1" src="bw.jpg" alt="bck1" width="100px" height="100px">
+<img id="bcg1" src="images/bw.jpg" alt="bck1" width="100px" height="100px">
 <p id="msg1"></p>
-<form name="form1" method="post" action="t11.php">
+<form name="form1" method="post" action="cells/t11.php">
 <input type="submit" id="continue" style="top:80%;left:70%;" name="continue" value="continue"></form>
 <input type="button" style="top:80%;left:85%;" name="back" value="back" onclick="moveback()">
 </div>
 <div id="pc2" class="pc">
-<img id="bcg2" src="bw1.jpg" alt="bck2" width="100px" height="100px">
+<img id="bcg2" src="images/bw1.jpg" alt="bck2" width="100px" height="100px">
 <p id="msg2"></p>
-<form name="form2" method="post" action="t12.php">
+<form name="form2" method="post" action="cells/t12.php">
 <input type="submit" style="top:80%;left:70%;" name="continue" value="continue">
 <input type="button" style="top:80%;left:85%;" name="back" value="back" onclick="moveback()">
 </form>
 </div>
 <div id="pc3">
-<img id="bcg3" src="dementor.jpg" alt="bck3" width="1400px" height="650px">
+<img id="bcg3" src="images/dementor.jpg" alt="bck3" width="1400px" height="650px">
 <p id="msg3"></p>
-<form name="form3" method="post" action="t13.php">
+<form name="form3" method="post" action="cells/t13.php">
 <input type="submit" style="top:80%;left:70%;" name="continue" value="continue">
 <input type="button" style="top:80%;left:85%;" name="back" value="back" onclick="moveback()">
 </form>
 </div>
 <div id="pc4" class="pc">
-<img id="bcg4" src="zombie1.jpg" alt="bck4" width="100px" height="100px">
+<img id="bcg4" src="images/zombie1.jpg" alt="bck4" width="100px" height="100px">
 <p id="msg4"></p>
-<form name="form4" method="post" action="t14.php">
+<form name="form4" method="post" action="cells/t14.php">
 <input type="submit" style="top:80%;left:70%;" name="continue" value="continue">
 <input type="button" style="top:80%;left:85%;" name="back" value="back" onclick="moveback()">
 </form>
 </div>
 <div id="pc5" class="pc">
-<img id="bcg5" src="dracula.gif" alt="bck5" width="100px" height="100px">
+<img id="bcg5" src="images/dracula.gif" alt="bck5" width="100px" height="100px">
 <p id="msg5"></p>
-<form name="form5" method="post" action="t15.php">
+<form name="form5" method="post" action="cells/t15.php">
 <input type="submit" style="top:80%;left:70%;" name="continue" value="continue">
 <input type="button" style="top:80%;left:85%;" name="back" value="back" onclick="moveback()">
 </form>
 </div>
 <div id="pc6" class="pc">
-<img id="bcg6" src="siren.jpg" alt="bck6" width="100px" height="100px">
+<img id="bcg6" src="images/siren.jpg" alt="bck6" width="100px" height="100px">
 <p id="msg6"></p>
-<form name="form6" method="post" action="t16.php">
+<form name="form6" method="post" action="cells/t16.php">
 <input type="submit" style="top:80%;left:70%;" name="continue" value="continue">
 <input type="button" style="top:80%;left:85%;" name="back" value="back" onclick="moveback()">
 </form>
 </div>
 <div id="pc7" class="pc">
-<img id="bcg7" src="beware.jpg" alt="bck7" width="100px" height="100px">
+<img id="bcg7" src="images/beware.jpg" alt="bck7" width="100px" height="100px">
 <p id="msg7"></p>
-<form name="form7" method="post" action="t17.php">
+<form name="form7" method="post" action="cells/t17.php">
 <input type="submit" style="top:80%;left:70%;" name="continue" value="continue">
 <input type="button" style="top:80%;left:85%;" name="back" value="back" onclick="moveback()">
 </form>
 </div>
 <div id="pc8" class="pc">
-<img id="bcg8" src="whitebcg.jpg" alt="bck8" width="100px" height="100px">
+<img id="bcg8" src="images/whitebcg.jpg" alt="bck8" width="100px" height="100px">
 <p id="msg8"></p>
-<form name="form8" method="post" action="t18.php">
+<form name="form8" method="post" action="cells/t18.php">
 <input type="submit" id="continue" style="top:80%;left:70%;" name="continue" value="continue">
 <input type="button" style="top:80%;left:85%;" name="back" value="back" onclick="moveback()">
 </form>
@@ -506,7 +506,7 @@ blob.remove();
 layer.remove();
 clearInterval(blobmove);ct=1;incell=1;
 player.y+=1;
-document.getElementById("bcg3").src="dementor.jpg";
+document.getElementById("bcg3").src="images/dementor.jpg";
 document.getElementById("bcg3").style.width="1400px";
 document.getElementById("bcg3").style.height="650px";
 clearInterval(z);
@@ -527,7 +527,7 @@ show("#msg3","SOUL COLLECTORS",0,25);
 });
 setTimeout(function(){swap()},6000);
 function swap(){
-document.getElementById("bcg3").src="dementors.jpg";
+document.getElementById("bcg3").src="images/dementors.jpg";
 }
 }
 if(player.x>1 && player.x<2 && player.y>24 && player.y<25){blob.stop();
@@ -738,7 +738,7 @@ function initScreen() {
 		strip.style.backgroundColor = "transparent";
 
 		var img = new Image();
-		img.src = (window.opera ? "walls_19color.png" : "wall.png");
+		img.src = (window.opera ? "images/walls_19color.png" : "images/wall.png");
 		img.style.position = "absolute";
 		img.style.left = "0px";
 
@@ -1026,7 +1026,7 @@ function makeinvisible()
 }
 
 </script>
-    <script src="kinetic.js"></script>
+    <script src="js/kinetic.js"></script>
     <script>
        var anim=0,flag=0,i=0,mv;
 	var blob;
@@ -1144,8 +1144,8 @@ function makeinvisible()
 		anim=1;
 		};
 		switch(i){
-		case 0:imageObj.src = 'blob2.png';blobw=20;document.getElementById("container").style.top=-400;mv=150;break;
-		case 1:imageObj.src = 'snake2.png';blobw=20;document.getElementById("container").style.top=-800;mv=250;break;}}
+		case 0:imageObj.src = 'images/blob2.png';blobw=20;document.getElementById("container").style.top=-400;mv=150;break;
+		case 1:imageObj.src = 'images/snake2.png';blobw=20;document.getElementById("container").style.top=-800;mv=250;break;}}
 	  if(flag==1){clearInterval(blobmove);
 blobmove=setInterval(function(){move1()},mv);
 var count=0;
@@ -1262,7 +1262,7 @@ flag=0;}
     </script>
 <audio id="audio3" autoplay="autoplay" loop="loop">
   
-  <source src="conjuring.mp3" type="audio/mpeg">
+  <source src="sounds/conjuring.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
 </audio>
 

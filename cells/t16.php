@@ -42,7 +42,7 @@ z-index:-10;
 h3{
 position:relative;
 font-family:chiller,Helvetica,Ariel,sans-seriff;
-font-size:35px;
+font-size:20px;
 text-align:left;
 left:250px;
 top:-1000px;
@@ -85,7 +85,7 @@ z-index:10;
  font-size:30px;
  font-color:green;
  background-position:right bottom;
- background-image:url(images/skybg.jpg);
+ background-image:url(../images/skybg.jpg);
  background-repeat:no-repeat;
  background-color:red;
  background-size:100% 100%;
@@ -104,31 +104,31 @@ background: #ffff00;
 <div id="clue" ><pre>
   USE THE FIRST LETTER OF EACH 
   SOLUTION TO GET THE ANSWER..
-   <img src="images/rebuspuz1.jpg" alt="anagram"/><form name="form1" method="post" action="check.php">
+   <img src="../images/rebuspuz1.jpg" alt="anagram"/><form name="form1" method="post" action="check.php">
   <input type="text" style="height:50px;width:300px;font-size:30px;" id="ans" name="ans6"/> <input type="submit" style="height:50px;width:200px;font-size:30px;" value="Submit" /></form>
   <input type="button" style="height:50px;width:200px;font-size:30px;left:70%;position:absolute;top:84%" value="Back" onclick="change()"/>
  </pre>
   </div>
 <audio id="au1">
-<source src="sounds/siren-final2.mp3" type="audio/mp3">
+<source src="../sounds/siren-final2.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="sounds/siren-final.mp3" type="audio/mp3">
+<source src="../sounds/siren-final.mp3" type="audio/mp3">
 </audio>
-<img id="ocean" src="images/ocean.gif" width="1000px" height="454px">
-<img id="siren" src="images/siren4.jpg" width="1000px" height="454px">
+<img id="ocean" src="../images/ocean.gif" width="1000px" height="454px">
+<img id="siren" src="../images/siren4.jpg" width="1000px" height="454px">
 <div>
-<img id="w" src="images/wood.jpg" alt="wood" width="1000px" height="150px">
-<img id="f" src="images/frame.jpg" alt="frame" width="1000px" height="150px">
+<img id="w" src="../images/wood.jpg" alt="wood" width="1000px" height="150px">
+<img id="f" src="../images/frame.jpg" alt="frame" width="1000px" height="150px">
 </div>
 <p  id="a" style="top:-480px;" >Tell me about sirens.</p>
 <p  id="b" style="top:-520px;" >Can you give me some information about the thief?</p>
 <p  id="c" class="HL" style="top:-555px;" >Okay.</p>
 <h3 id="msg"></h3>
-<form action="fmaze2.php" method="post">
+<form action="../fmaze2.php" method="post">
 <input id="back" type="submit" value="back" name="back">
 </form>
-<script src="jquery.js">
+<script src="../js/jquery.js">
 </script>
 <script type="text/javascript">
 var ind=0,ctr=0,s,q;

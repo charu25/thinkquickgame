@@ -52,7 +52,7 @@ z-index:-10;
 h3{
 position:relative;
 font-family:chiller,Helvetica,Ariel,sans-seriff;
-font-size:35px;
+font-size:20px;
 text-align:left;
 left:250px;
 top:-700px;
@@ -95,16 +95,16 @@ background: #ffff00;
 </style>
 <body>
 <audio id="au1">
-<source src="sounds/dem2.mp3" type="audio/mp3">
+<source src="../sounds/dem2.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="sounds/dem1.mp3" type="audio/mp3">
+<source src="../sounds/dem1.mp3" type="audio/mp3">
 </audio>
-<img id="dementor" src="images/dem2.png" width="340px" height="350px">
-<img id="dem" src="images/dem.gif" width="1000px" height="600px">
+<img id="dementor" src="../images/dem2.png" width="340px" height="350px">
+<img id="dem" src="../images/dem.gif" width="1000px" height="600px">
 <div>
-<img id="w" src="images/wood.jpg" alt="wood" width="1000px" height="150px">
-<img id="f" src="images/frame.jpg" alt="frame" width="1000px" height="150px">
+<img id="w" src="../images/wood.jpg" alt="wood" width="1000px" height="150px">
+<img id="f" src="../images/frame.jpg" alt="frame" width="1000px" height="150px">
 </div>
 <div id="words">
 <p  id="a" style="top:-150px;" >Tell me about dementors.</p>
@@ -134,10 +134,10 @@ On the  first  turn <input type="text"  name="ans31"/> along with his girlfriend
 On the  fourth turn <input type="text" name="ans34" /> along with his girlfriend,  <input type="text" name="ans35" /> cast a <input type="text"  name="ans36" /> spell. 
  <input type="submit" style="height:40px;width:200px;font-size:30px;" value="Submit" onclick="check()"/>   <input type="button" style="height:40px;width:200px;font-size:30px;" value="back" onclick="change()"/></pre>
   </form></div>
-<form action="fmaze2.php" method="post">
+<form action="../fmaze2.php" method="post">
 <input id="back" type="submit" value="back" name="back">
 </form>
-<script src="jquery.js">
+<script src="../js/jquery.js">
 </script>
 <script type="text/javascript">
 var ind=0,ctr=0,s,q;

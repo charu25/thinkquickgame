@@ -43,7 +43,7 @@ left:400px;
 margin-top:40px;
 z-index:100;
 color:red;
-font-size:25px;
+font-size:20px;
 font-weight:15px;
 }
 img{
@@ -52,7 +52,7 @@ z-index:-10;
 h3{
 position:relative;
 font-family:chiller,Helvetica,Ariel,sans-seriff;
-font-size:35px;
+font-size:20px;
 text-align:left;
 left:250px;
 top:-700px;
@@ -82,7 +82,7 @@ margin-top:20px;
  font-size:50px;
  font-color:green;
  background-position:right bottom;
- background-image:url(images/whitebg.jpg);
+ background-image:url(../images/whitebg.jpg);
  background-repeat:no-repeat;
  background-color:red;
  background-size:100% 100%;
@@ -101,30 +101,30 @@ background: #ffff00;
 }
 </style>
 <body>
-<form action="fmaze2.php" method="post">
+<form action="../fmaze2.php" method="post">
 <input id="back" type="submit" value="back" name="back">
 </form>
 <audio id="au1">
-<source src="sounds/mummy1.mp3" type="audio/mp3">
+<source src="../sounds/mummy1.mp3" type="audio/mp3">
 </audio>
 <audio id="au2">
-<source src="sounds/mummy2.mp3" type="audio/mp3">
+<source src="../sounds/mummy2.mp3" type="audio/mp3">
 </audio>
-<img id="mummy" src="images/mummy.gif" width="200px" height="250px">
-<img id="grave" src="images/graveyard.jpg" width="1000px" height="550px">
+<img id="mummy" src="../images/mummy.gif" width="200px" height="250px">
+<img id="grave" src="../images/graveyard.jpg" width="1000px" height="550px">
 <div>
-<img id="w" src="images/wood.jpg" alt="wood" width="1000px" height="150px">
-<img id="f" src="images/frame.jpg" alt="frame" width="1000px" height="150px">
+<img id="w" src="../images/wood.jpg" alt="wood" width="1000px" height="150px">
+<img id="f" src="../images/frame.jpg" alt="frame" width="1000px" height="150px">
 </div>
 <div id="clue" ><pre>
-   <img id="rid" src="images/riddle.png" style="height:70%;width:50%;"alt="cipher"/><form method="post" action="check.php">
+   <img id="rid" src="../images/riddle.png" style="height:70%;width:50%;"alt="cipher"/><form method="post" action="check.php">
    <input type="text"  style="height:40px;width:200px;font-size:30px;" id="ans" name="ans4"/> <input type="submit"  style="height:40px;width:200px;font-size:30px;" value="Submit" /> <input type="button" style="height:40px;width:200px;font-size:30px;" value="back" onclick="change()"/></pre></form>
   </div>
 <p  id="a" style="top:-150px;" >Tell me about mummies.</p>
 <p  id="b" style="top:-190px;" >Will you give me some information about the thief?</p>
 <p  id="c" style="top:-240px;font-size:50px;" >Okay.</p>
 <h3 id="msg"></h3>
-<script src="jquery.js">
+<script src="../js/jquery.js">
 </script>
 <script type="text/javascript">
 var ind=0,ctr=0,s,q;
